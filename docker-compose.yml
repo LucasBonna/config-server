@@ -1,0 +1,17 @@
+services:
+  config-server:
+    container_name: config-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/app
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true
