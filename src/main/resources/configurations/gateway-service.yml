@@ -1,0 +1,23 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: emission-service
+          uri: lb:http://EMISSION-SERVICE
+          predicates:
+            - Path=/cfemission/**
+          filters:
+            - RewritePath=/cfemission/(?<remaining>.*), /${remaining}
+        - id: storage-service
+          uri: lb:http://STORAGE-SERVICE
+          predicates:
+            - Path=/cfstorage/**
+          filters:
+            - RewritePath=/cfstorage/(?<remaining>.*), /${remaining}
+
+server:
+  port: 8000

@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://db_storage:5432/cfstorage
+    url: jdbc:postgresql://db_emission:5432/cfemission
     username: docker
     password: docker
     driver-class-name: org.postgresql.Driver
@@ -13,4 +13,4 @@ spring:
 gateway_url: ${API_GATEWAY_URL:http://localhost:8000}
 
 server:
-  port: 8002
+  port: 8001
