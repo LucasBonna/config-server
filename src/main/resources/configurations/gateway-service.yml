@@ -18,6 +18,18 @@ spring:
             - Path=/cfstorage/**
           filters:
             - RewritePath=/cfstorage/(?<remaining>.*), /${remaining}
+  datasource:
+    url: jdbc:postgresql://db_gateway:5432/cfgateway
+    username: docker
+    password: docker
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+gateway_url: ${API_GATEWAY_URL:http://localhost:8000}
 
 server:
   port: 8000
