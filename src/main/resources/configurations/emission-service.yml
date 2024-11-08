@@ -9,8 +9,26 @@ spring:
       ddl-auto: update
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  kafka:
+    bootstrap-servers: kafka_emission:9092
+    consumer:
+      group-id: gnre-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: 'br.com.contafacil.bonnarotec.emission.domain.emission.gnre'
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  storage:
+    service:
+      url: http://storage-service:8002
 
 gateway_url: ${API_GATEWAY_URL:http://localhost:8000}
 
-server:
-  port: 8001
+frontend_url: ${FRONTEND_URL:http://localhost:3000}
