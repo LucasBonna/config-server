@@ -18,6 +18,12 @@ spring:
             - Path=/cfstorage/**
           filters:
             - RewritePath=/cfstorage/(?<remaining>.*), /${remaining}
+        - id: registry-service
+          uri: lb:http://REGISTRY-SERVICE
+          predicates:
+            - Path=/cfregistry/**
+          filters:
+            - RewritePath=/cfregistry/(?<remaining>.*), /${remaining}
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Methods Access-Control-Allow-Headers RETAIN_FIRST
 

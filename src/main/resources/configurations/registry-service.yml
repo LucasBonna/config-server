@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://db_registry:5432/cfregistry
+    username: docker
+    password: docker
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+gateway_url: ${API_GATEWAY_URL:http://localhost:8000}
+frontend_url: ${FRONTEND_URL:http://localhost:3000}
+
+server:
+  port: 8004
