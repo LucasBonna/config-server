@@ -18,17 +18,26 @@ spring:
     consumer:
       group-id: gnre-group
       auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       properties:
-        spring.json.trusted.packages: 'br.com.contafacil.bonnarotec.emission.domain.emission.gnre'
+        spring.json.trusted.packages: '*'
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.value.default.type: br.com.contafacil.bonnarotec.emission.domain.emission.gnre.GNREQueueMessage
+        spring.json.use.type.headers: false
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-  storage:
-    service:
-      url: http://storage-service:8002
+      properties:
+        spring.json.add.type.headers: false
 
 gateway_url: ${API_GATEWAY_URL:http://localhost:8000}
-
 frontend_url: ${FRONTEND_URL:http://localhost:3000}
+storage:
+  url: ${STORAGE_SERVICE_URL:http://storage-service:8002}
+registry:
+  url: ${REGISTRY_SERVICE_URL:http://registry-service:8004}
+
+server:
+  port: 8002
