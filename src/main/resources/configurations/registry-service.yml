@@ -13,5 +13,8 @@ spring:
 gateway_url: ${API_GATEWAY_URL:http://localhost:8000}
 frontend_url: ${FRONTEND_URL:http://localhost:3000}
 
+jwt:
+  secret: ffc8faeefff096f390265fb9f0dd6fbe2abf7146bf9ad8ba276a6e4366b2dfc5
+
 server:
   port: 8004
