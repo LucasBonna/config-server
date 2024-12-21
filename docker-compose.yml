@@ -13,4 +13,5 @@ services:
       - dokploy-network
 
 networks:
-  dokploy-network:
+  coolify:
+    external: true
